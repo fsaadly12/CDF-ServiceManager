@@ -1,7 +1,17 @@
 <h2>Services</h2>
 
-<ul>
-  <li *ngFor="let s of services">
-    <strong>{{ s.title }}</strong> - {{ s.status }}
-  </li>
-</ul>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Status</th>
+  </tr>
+
+  <tr *ngFor="let s of services">
+    <td>{{ s.id }}</td>
+    <td>{{ s.title }}</td>
+    <td>{{ s.description }}</td>
+    <td>{{ s.status }}</td>
+  </tr>
+</table>
