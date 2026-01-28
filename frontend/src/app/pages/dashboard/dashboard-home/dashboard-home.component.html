@@ -1,1 +1,7 @@
-<p>dashbord-home works!</p>
+<h2>Services</h2>
+
+<ul>
+  <li *ngFor="let s of services">
+    <strong>{{ s.title }}</strong> - {{ s.status }}
+  </li>
+</ul>
