@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -9,7 +10,13 @@ export class DashboardHomeComponent implements OnInit {
 
   services: any[] = [];
 
-  constructor(private serviceService: ServiceService) {}
+  constructor(private serviceService: ServiceService,
+      private router: Router
+  ) {}
+logout() {
+  localStorage.removeItem('token');
+  this.router.navigate(['/auth/login']);
+}
 
   ngOnInit(): void {
     this.serviceService.getServices().subscribe({
