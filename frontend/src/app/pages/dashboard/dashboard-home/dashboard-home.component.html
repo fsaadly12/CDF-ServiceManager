@@ -17,3 +17,22 @@
     <td>{{ s.status }}</td>
   </tr>
 </table>
+<h3>Add Service</h3>
+
+<form (ngSubmit)="addService()">
+  <input type="text" placeholder="Title" [(ngModel)]="newService.title" name="title" required>
+  <br><br>
+
+  <input type="text" placeholder="Description" [(ngModel)]="newService.description" name="description" required>
+  <br><br>
+
+  <select [(ngModel)]="newService.status" name="status">
+    <option value="pending">pending</option>
+    <option value="done">done</option>
+  </select>
+
+  <br><br>
+  <button type="submit">Add</button>
+</form>
+
+<hr>

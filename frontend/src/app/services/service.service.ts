@@ -14,4 +14,8 @@ export class ServiceService {
   getServices(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
+  addService(service: any): Observable<any> {
+  return this.http.post(this.apiUrl, service);
+}
+
 }
