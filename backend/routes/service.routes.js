@@ -23,5 +23,20 @@ router.post('/', (req, res) => {
     }
   );
 });
+// Delete service
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  db.query(
+    'DELETE FROM services WHERE id = ?',
+    [id],
+    (err, result) => {
+      if (err) return res.status(500).json(err);
+      res.json({ message: 'Service deleted' });
+    }
+  );
+});
+
+
 
 module.exports = router;

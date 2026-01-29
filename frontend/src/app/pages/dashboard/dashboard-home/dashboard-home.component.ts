@@ -56,4 +56,19 @@ export class DashboardHomeComponent implements OnInit {
       }
     });
   }
+  deleteService(id: number) {
+  if (!confirm('Are you sure you want to delete this service?')) {
+    return;
+  }
+
+  this.serviceService.deleteService(id).subscribe({
+    next: () => {
+      this.services = this.services.filter(s => s.id !== id);
+    },
+    error: (err) => {
+      console.error('Delete error:', err);
+    }
+  });
+}
+
 }
