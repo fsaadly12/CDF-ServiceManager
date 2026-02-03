@@ -5,7 +5,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.component.html',
+  
 })
+
 export class DashboardHomeComponent implements OnInit {
 
   services: any[] = [];
@@ -16,6 +18,8 @@ export class DashboardHomeComponent implements OnInit {
     status: 'pending',
     user_id: 1
   };
+  editingId: number | null = null;
+
 
   constructor(private serviceService: ServiceService,
   private router: Router
@@ -69,6 +73,38 @@ export class DashboardHomeComponent implements OnInit {
       console.error('Delete error:', err);
     }
   });
+
 }
+editService(service: any) {
+  this.newService = { ...service };
+  this.editingId = service.id;
+}
+
+saveService() {
+  if (this.editingId === null) return;
+
+  this.serviceService
+    .updateService(this.editingId, this.newService)
+    .subscribe({
+      next: () => {
+        this.getServices();
+        this.resetForm();
+      },
+      error: (err) => {
+        console.error('UPDATE ERROR:', err);
+      }
+    });
+}
+
+resetForm() {
+  this.newService = {
+    title: '',
+    description: '',
+    status: 'pending',
+    user_id: 1
+  };
+  this.editingId = null;
+}
+
 
 }

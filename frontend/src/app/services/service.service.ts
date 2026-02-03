@@ -20,6 +20,9 @@ export class ServiceService {
 deleteService(id: number): Observable<any> {
   return this.http.delete(`${this.apiUrl}/${id}`);
 }
+updateService(id: number, service: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${id}`, service);
+}
 
 
 }

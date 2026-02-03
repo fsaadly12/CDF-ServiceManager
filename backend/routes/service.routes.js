@@ -36,6 +36,21 @@ router.delete('/:id', (req, res) => {
     }
   );
 });
+// Update service
+router.put('/:id', (req, res) => {
+  const { title, description, status } = req.body;
+  const { id } = req.params;
+
+  db.query(
+    'UPDATE services SET title=?, description=?, status=? WHERE id=?',
+    [title, description, status, id],
+    (err) => {
+      if (err) return res.status(500).json(err);
+      res.json({ message: 'Service updated' });
+    }
+  );
+});
+
 
 
 
