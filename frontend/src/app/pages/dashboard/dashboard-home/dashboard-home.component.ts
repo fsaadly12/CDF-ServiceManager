@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/services/service.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -22,7 +23,8 @@ export class DashboardHomeComponent implements OnInit {
 
 
   constructor(private serviceService: ServiceService,
-  private router: Router
+  private router: Router,
+  private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -45,39 +47,49 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   addService() {
-    this.serviceService.addService(this.newService).subscribe({
-      next: () => {
-        this.getServices();
-        this.newService = {
-          title: '',
-          description: '',
-          status: 'pending',
-          user_id: 1
-        };
-      },
-      error: (err) => {
-        console.error('ADD ERROR:', err);
-      }
-    });
-  }
-  deleteService(id: number) {
-  if (!confirm('Are you sure you want to delete this service?')) {
-    return;
-  }
+  this.serviceService.addService(this.newService).subscribe({
+    next: () => {
+      this.getServices();
+      this.resetForm();
+
+      this.snackBar.open('Service added successfully', 'OK', {
+        duration: 3000
+      });
+    },
+    error: () => {
+      this.snackBar.open('Error adding service', 'Close', {
+        duration: 3000
+      });
+    }
+  });
+}
+
+deleteService(id: number) {
+  if (!confirm('Are you sure?')) return;
 
   this.serviceService.deleteService(id).subscribe({
     next: () => {
       this.services = this.services.filter(s => s.id !== id);
+
+      this.snackBar.open('Service deleted', 'OK', {
+        duration: 3000
+      });
     },
-    error: (err) => {
-      console.error('Delete error:', err);
+    error: () => {
+      this.snackBar.open('Error deleting service', 'Close', {
+        duration: 3000
+      });
     }
   });
-
 }
+
 editService(service: any) {
   this.newService = { ...service };
   this.editingId = service.id;
+  this.snackBar.open('Service updated', 'OK', {
+  duration: 3000
+});
+
 }
 
 saveService() {
