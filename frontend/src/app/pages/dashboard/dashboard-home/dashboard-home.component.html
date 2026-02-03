@@ -1,43 +1,105 @@
-<button (click)="logout()">Logout</button>
+<mat-toolbar color="primary" class="mb-3">
+  <span>CDF Service Manager</span>
+  <span class="flex-grow-1"></span>
+  <button mat-raised-button color="warn" (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>
+
 
 <h2>Services</h2>
 
-<table border="1" cellpadding="5">
-  <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
+<table class="table table-bordered table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
 
-  <tr *ngFor="let s of services">
-    <td>{{ s.id }}</td>
-    <td>{{ s.title }}</td>
-    <td>{{ s.description }}</td>
-    <td>{{ s.status }}</td>
-    <td>
-      <button (click)="editService(s)">Edit</button>
-      <button (click)="deleteService(s.id)">Delete</button>
-    </td>
-  </tr>
+  <tbody>
+    <tr *ngFor="let s of services">
+      <td>{{ s.id }}</td>
+      <td>{{ s.title }}</td>
+      <td>{{ s.description }}</td>
+      <td>
+        <span
+          class="badge"
+          [ngClass]="{
+            'bg-warning': s.status === 'pending',
+            'bg-success': s.status === 'done'
+          }"
+        >
+          {{ s.status }}
+        </span>
+      </td>
+      <td>
+        <button
+          mat-icon-button
+          color="primary"
+          (click)="editService(s)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="deleteService(s.id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
+
 <h3>{{ editingId ? 'Edit Service' : 'Add Service' }}</h3>
-<form (ngSubmit)="editingId ? saveService() : addService()">
+<mat-card>
+  <mat-card-title>
+    {{ editingId ? 'Edit Service' : 'Add Service' }}
+  </mat-card-title>
 
-  <input type="text" [(ngModel)]="newService.title" name="title" placeholder="Title" required>
-  <br><br>
-  <input type="text" [(ngModel)]="newService.description" name="description" placeholder="Description" required>
-  <br><br>
-  <select [(ngModel)]="newService.status" name="status">
-    <option value="pending">pending</option>
-    <option value="done">done</option>
-  </select>
-  <br><br>
-  <button type="submit">
-    {{ editingId ? 'Save' : 'Add' }}
-  </button>
-  
+  <form (ngSubmit)="editingId ? saveService() : addService()">
 
-</form>
+    <mat-form-field class="w-100 mb-2">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="newService.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 mb-2">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="newService.description" name="description" required>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 mb-3">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="newService.status" name="status">
+        <mat-option value="pending">Pending</mat-option>
+        <mat-option value="done">Done</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+    >
+      {{ editingId ? 'Save' : 'Add' }}
+    </button>
+
+    <button
+      *ngIf="editingId"
+      mat-button
+      type="button"
+      (click)="resetForm()"
+    >
+      Cancel
+    </button>
+
+  </form>
+</mat-card>
