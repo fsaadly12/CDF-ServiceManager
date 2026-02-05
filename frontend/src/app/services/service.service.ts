@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Service } from '../models/service.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +12,19 @@ export class ServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getServices(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  getServices(): Observable<Service[]> {
+    return this.http.get<Service[]>(this.apiUrl);
   }
-  addService(service: any): Observable<any> {
-  return this.http.post(this.apiUrl, service);
-}
-deleteService(id: number): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/${id}`);
-}
-updateService(id: number, service: any): Observable<any> {
-  return this.http.put(`${this.apiUrl}/${id}`, service);
-}
 
+  addService(service: Service): Observable<Service> {
+    return this.http.post<Service>(this.apiUrl, service);
+  }
 
+  updateService(id: number, service: Service): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, service);
+  }
+
+  deleteService(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

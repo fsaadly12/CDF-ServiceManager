@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
+import { Service } from 'src/app/models/service.model';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -13,14 +14,15 @@ import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-di
 
 export class DashboardHomeComponent implements OnInit {
 
-  services: any[] = [];
+  services: Service[] = [];
 
-  newService = {
-    title: '',
-    description: '',
-    status: 'pending',
-    user_id: 1
-  };
+ newService: Service = {
+  title: '',
+  description: '',
+  status: 'pending',
+  user_id: 1
+};
+
   editingId: number | null = null;
 
 
