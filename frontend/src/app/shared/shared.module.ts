@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +25,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatSnackBarModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatToolbarModule,
@@ -34,7 +36,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule {}

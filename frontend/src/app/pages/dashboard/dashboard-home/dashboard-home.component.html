@@ -8,6 +8,9 @@
 
 
 <h2>Services</h2>
+<div *ngIf="loading" class="text-center my-3">
+  <mat-spinner diameter="40"></mat-spinner>
+</div>
 
 <table class="table table-bordered table-striped">
   <thead class="table-dark">
@@ -49,14 +52,20 @@
         <button
           mat-icon-button
           color="warn"
+          [disabled]="editingId === s.id"
           (click)="deleteService(s.id!)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+  >
+  <mat-icon>delete</mat-icon>
+</button>
+
       </td>
     </tr>
   </tbody>
 </table>
+<div *ngIf="services.length === 0" class="text-center text-muted mt-4">
+  <mat-icon>info</mat-icon>
+  <p>No services yet. Add your first service.</p>
+</div>
 
 
 <mat-card>

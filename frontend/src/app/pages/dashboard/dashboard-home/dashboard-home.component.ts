@@ -15,8 +15,9 @@ import { Service } from 'src/app/models/service.model';
 export class DashboardHomeComponent implements OnInit {
 
   services: Service[] = [];
+  loading = false;
 
- newService: Service = {
+  newService: Service = {
   title: '',
   description: '',
   status: 'pending',
@@ -43,15 +44,19 @@ export class DashboardHomeComponent implements OnInit {
 }
 
   getServices() {
-    this.serviceService.getServices().subscribe({
-      next: (data) => {
-        this.services = data;
-      },
-      error: (err) => {
-        console.error('API ERROR:', err);
-      }
-    });
-  }
+  this.loading = true;
+  this.serviceService.getServices().subscribe({
+    next: (data) => {
+      this.services = data;
+      this.loading = false;
+    },
+    error: (err) => {
+      console.error(err);
+      this.loading = false;
+    }
+  });
+}
+
 
   addService() {
     this.serviceService.addService(this.newService).subscribe({
