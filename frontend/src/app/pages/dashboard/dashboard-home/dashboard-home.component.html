@@ -26,16 +26,17 @@
       <td>{{ s.title }}</td>
       <td>{{ s.description }}</td>
       <td>
-        <span
-          class="badge"
-          [ngClass]="{
-            'bg-warning': s.status === 'pending',
-            'bg-success': s.status === 'done'
-          }"
-        >
-          {{ s.status }}
-        </span>
-      </td>
+  <span
+    class="badge"
+    [ngClass]="{
+      'bg-warning text-dark': s.status === 'pending',
+      'bg-success': s.status === 'done'
+    }"
+  >
+    {{ s.status | titlecase }}
+  </span>
+</td>
+
       <td>
         <button
           mat-icon-button
@@ -60,8 +61,10 @@
 
 <mat-card>
   <mat-card-title>
-    {{ editingId ? 'Edit Service' : 'Add Service' }}
-  </mat-card-title>
+  <mat-icon *ngIf="editingId">edit</mat-icon>
+  {{ editingId ? 'Edit Service' : 'Add Service' }}
+</mat-card-title>
+
 
   <form (ngSubmit)="editingId ? saveService() : addService()">
 
@@ -84,21 +87,24 @@
     </mat-form-field>
 
     <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-    >
-      {{ editingId ? 'Save' : 'Add' }}
-    </button>
+  mat-raised-button
+  color="primary"
+  type="submit"
+  [disabled]="!newService.title || !newService.description"
+>
+  {{ editingId ? 'Save' : 'Add' }}
+</button>
 
-    <button
-      *ngIf="editingId"
-      mat-button
-      type="button"
-      (click)="resetForm()"
-    >
-      Cancel
-    </button>
+   <button
+  *ngIf="editingId"
+  mat-button
+  color="warn"
+  type="button"
+  (click)="resetForm()"
+>
+  Cancel
+</button>
+
 
   </form>
 </mat-card>

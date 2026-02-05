@@ -8,9 +8,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
-  declarations: [],
+  declarations: [
+    ConfirmDialogComponent
+  ],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -19,7 +22,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatInputModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CommonModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -28,7 +33,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatCardModule,
     MatInputModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ]
 })
 export class SharedModule {}
