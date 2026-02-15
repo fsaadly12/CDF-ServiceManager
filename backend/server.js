@@ -1,6 +1,7 @@
 const db = require('./config/db');
 const authRoutes = require('./routes/auth.routes');
 const serviceRoutes = require('./routes/service.routes');
+const requestRoutes = require('./routes/request.routes');
 
 const express = require('express');
 const cors = require('cors');
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/api/services', serviceRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/requests', requestRoutes);
 
 app.get('/', (req, res) => {
   res.send('CDF ServiceManager API running...');
