@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/confirm-dialog/confirm-dialog.component';
 import { Service } from 'src/app/models/service.model';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-dashboard-home',
