@@ -1,0 +1,29 @@
+<h2>All Client Requests</h2>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<table *ngIf="!loading" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Client</th>
+      <th>Service</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Pricing</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let r of requests">
+      <td>{{ r.client_name }}</td>
+      <td>{{ r.service_title }}</td>
+      <td>{{ r.description }}</td>
+      <td>{{ r.status }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm">
+          Set Price
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

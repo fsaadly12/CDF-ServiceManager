@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
+import { EmployeeModule } from './pages/employee/employee-dashboard/employee.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -17,7 +18,8 @@ import { MaterialModule } from './shared/material/material.module';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    EmployeeModule
 
   ],
   providers: [],

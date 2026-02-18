@@ -17,4 +17,8 @@ export class RequestService {
   createRequest(data: any) {
     return this.http.post(this.apiUrl, data);
   }
+  getAllRequests() {
+  return this.http.get<any[]>('http://localhost:3000/api/requests/all');
+}
+
 }
