@@ -28,4 +28,24 @@ export class EmployeeDashboardComponent implements OnInit {
       }
     });
   }
+  setPrice(request: any) {
+
+  if (!request.tempPrice) {
+    alert('Enter a price');
+    return;
+  }
+
+  this.requestService.setPrice(request.id, request.tempPrice)
+    .subscribe({
+      next: () => {
+        request.status = 'PRICED';
+        request.price = request.tempPrice;
+        request.tempPrice = null;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+}
+
 }

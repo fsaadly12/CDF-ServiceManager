@@ -20,10 +20,21 @@
       <td>{{ r.description }}</td>
       <td>{{ r.status }}</td>
       <td>
-        <button class="btn btn-primary btn-sm">
-          Set Price
-        </button>
-      </td>
+  <input
+    type="number"
+    [(ngModel)]="r.tempPrice"
+    class="form-control form-control-sm mb-1"
+    placeholder="Enter price"
+  />
+
+  <button
+    class="btn btn-success btn-sm"
+    (click)="setPrice(r)"
+  >
+    Confirm
+  </button>
+</td>
+
     </tr>
   </tbody>
 </table>

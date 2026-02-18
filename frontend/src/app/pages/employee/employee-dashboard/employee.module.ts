@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 import { EmployeeDashboardComponent } from './employee-dashboard.component';
 
@@ -10,7 +11,9 @@ import { EmployeeDashboardComponent } from './employee-dashboard.component';
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule
+
   ]
 })
 export class EmployeeModule {}
