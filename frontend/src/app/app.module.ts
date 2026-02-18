@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { EmployeeModule } from './pages/employee/employee-dashboard/employee.module';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,9 +22,14 @@ import { EmployeeModule } from './pages/employee/employee-dashboard/employee.mod
     BrowserAnimationsModule,
     MaterialModule,
     EmployeeModule
-
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
