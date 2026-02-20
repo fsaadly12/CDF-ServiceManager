@@ -88,5 +88,66 @@ router.put('/:id/price', verifyToken, roleMiddleware('admin'), (req, res) => {
   });
 });
 
+// Employee set price
+router.put('/:id/price', verifyToken, (req, res) => {
+
+  const requestId = req.params.id;
+  const { price } = req.body;
+
+  if (!price) {
+    return res.status(400).json({ message: 'Price is required' });
+  }
+
+  const sql = `
+    UPDATE requests
+    SET price = ?, status = 'PRICED'
+    WHERE id = ?
+  `;
+
+  db.query(sql, [price, requestId], (err, result) => {
+    if (err) return res.status(500).json(err);
+
+    res.json({ message: 'Price set successfully' });
+  });
+
+});
+// Client accept request
+router.put('/:id/accept', verifyToken, (req, res) => {
+
+  const requestId = req.params.id;
+
+  const sql = `
+    UPDATE requests
+    SET status = 'ACCEPTED'
+    WHERE id = ? AND user_id = ?
+  `;
+
+  db.query(sql, [requestId, req.user.id], (err, result) => {
+    if (err) return res.status(500).json(err);
+
+    res.json({ message: 'Request accepted' });
+  });
+});
+
+
+// Client reject request
+router.put('/:id/accept', verifyToken, (req, res) => {
+
+  const requestId = req.params.id;
+
+  const sql = `
+    UPDATE requests
+    SET status = 'ACCEPTED'
+    WHERE id = ?
+  `;
+
+  db.query(sql, [requestId], (err, result) => {
+    if (err) return res.status(500).json(err);
+
+    res.json({ message: 'Request accepted' });
+  });
+
+});
+
 
 module.exports = router;
