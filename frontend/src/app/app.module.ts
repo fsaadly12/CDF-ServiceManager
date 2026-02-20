@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
-import { EmployeeModule } from './pages/employee/employee-dashboard/employee.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 @NgModule({
@@ -20,8 +19,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    EmployeeModule
+    MaterialModule
+
   ],
   providers: [
     {

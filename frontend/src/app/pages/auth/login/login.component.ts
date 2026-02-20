@@ -27,14 +27,21 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.invalid) return;
 
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.token);
-        this.router.navigate(['/dashboard']);
-      },
-      error: () => {
-        this.errorMessage = 'Invalid credentials';
-      }
-    });
+ this.authService.login(this.loginForm.value).subscribe({
+  next: (res) => {
+
+  localStorage.setItem('token', res.token);
+  localStorage.setItem('role', res.role);
+
+  const role = res.role;
+
+  if (role === 'admin' || role === 'employee') {
+    this.router.navigate(['/dashboard']);
+  } else {
+    this.router.navigate(['/client']);
+  }
+
+},
+});
   }
 }

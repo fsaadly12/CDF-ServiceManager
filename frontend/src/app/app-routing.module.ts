@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardHomeComponent } from '../app//pages/dashboard/dashboard-home/dashboard-home.component';
-import { EmployeeDashboardComponent } from './pages/employee/employee-dashboard/employee-dashboard.component';
+import { DashboardHomeComponent } from './pages/dashboard/dashboard-home/dashboard-home.component';
+import { ClientDashboardComponent } from './pages/client/client-dashboard/client-dashboard.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -21,8 +22,16 @@ const routes: Routes = [
 },
  { path: '', component: DashboardHomeComponent },
  {
-  path: 'employee',
-  component: EmployeeDashboardComponent
+  path: 'dashboard',
+  component: DashboardHomeComponent,
+  canActivate: [AuthGuard],
+  data: { roles: ['admin', 'employee'] }
+},
+{
+  path: 'client',
+  component: ClientDashboardComponent,
+  canActivate: [AuthGuard],
+  data: { roles: ['client'] }
 }
 
 
