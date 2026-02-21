@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
-
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 @Component({
   selector: 'app-client-dashboard',

@@ -31,16 +31,16 @@ export class LoginComponent {
   next: (res) => {
 
   localStorage.setItem('token', res.token);
-  localStorage.setItem('role', res.role);
+  localStorage.setItem('role', res.user.role);
+  localStorage.setItem('user_id', res.user.id);
 
-  const role = res.role;
+  const role = res.user.role;
 
   if (role === 'admin' || role === 'employee') {
     this.router.navigate(['/dashboard']);
   } else {
     this.router.navigate(['/client']);
   }
-
 },
 });
   }

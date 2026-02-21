@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-
+import { PagesModule } from './pages/pages.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +19,9 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    PagesModule
+
 
   ],
   providers: [
